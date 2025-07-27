@@ -70,7 +70,7 @@ export const placeOrderStripe = async (req,res)=>{
         const session = await stripeInstance.checkout.sessions.create({
             line_items,
             mode: "payment",
-            success_url: `${origin}/loader?next=my-order`,
+            success_url: `${origin}/loader?next=my-orders`,
             cancel_url: `${origin}/cart`,
             metadata:{
                 orderId: order._id.toString(),
@@ -137,7 +137,7 @@ export const getUserOrders = async(req,res)=>{
         const{ userId } = req.query;
         const orders = await Order.find({
             userId,
-            $or: [{paymentType: "COD"},{isPaid: true}]
+            $or: [{paymentType: "COD"},{isPaid: true},{paymentType: "Online"}]
         }).populate("address")
       .populate("items.product") 
       .sort({ createdAt: -1 });
@@ -151,7 +151,7 @@ export const getUserOrders = async(req,res)=>{
 export const getAllOrders = async (req,res)=>{
     try {
         const orders = await Order.find({
-            $or: [{paymentType: "COD"},{isPaid: true}]
+            $or: [{paymentType: "COD"},{isPaid: true},{paymentType: "Online"}]
         }).populate('userId').populate('items.product').populate('address');
         res.json({ success: true, orders }); // ✅ You missed this
     } catch (error) {
