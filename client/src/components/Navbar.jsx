@@ -37,8 +37,9 @@ const Navbar = () => {
                 <NavLink to='/'>Home</NavLink>
                 <NavLink to='/products'>All Product</NavLink>
                 <NavLink to='/'>Contact</NavLink>
+                <NavLink to='/help'>Helpbox</NavLink>    
 
-                <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
+                <div  className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
                     <input onChange={(e)=> setSearchQuery(e.target.value)} className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
                     <img src={assets.search_icon} alt='search' className='w-4 h-4'/>
                 </div>
@@ -81,7 +82,9 @@ const Navbar = () => {
                 {user &&
                 <NavLink to='/products' onClick={()=> setOpen(false)}>My Orders</NavLink>
                 }
-                <NavLink to='/'>Contact</NavLink>    
+                <NavLink to='/'>Contact</NavLink>  
+                <NavLink to='/help'>Helpbox</NavLink>    
+  
                {!user ? (
                 <button onClick={()=>{setOpen(false)}}
                 className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm">
